@@ -34,7 +34,7 @@
 <script type="text/javascript" src="dat.gui.min.js"></script>
 
 <script>
-    window.ga = window.ga || function() {
+    window.ga = window.ga || function () {
         (ga.q = ga.q || []).push(arguments)
     };
     ga.l = +new Date;
@@ -43,12 +43,13 @@
 </script>
 <script async src="https://www.google-analytics.com/analytics.js"></script>
 
-
 <body>
-
+    <div id="loading">
+        <div class="gif"></div>
+    </div>
     <canvas></canvas>
 
-    <div class="promo">
+    <!-- <div class="promo">
         <div class="promo-middle">
             <div class="promo-content">
                 <div class="promo-header">
@@ -67,10 +68,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <h1>
-        <script src="./script.js"></script>
-    </h1>
+    </div> -->
+    <script src="./script.js"></script>
+
 </body>
 
 </html>
