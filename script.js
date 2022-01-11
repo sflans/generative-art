@@ -18,6 +18,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+console.log('connected')
+
 'use strict';
 
 var song;
@@ -26,6 +28,14 @@ var particles = []
 
 function hideLoader() {
     document.querySelector('#loading').remove();
+}
+
+function playPause() {
+    if (song.isPlaying()) {
+        song.pause();
+    } else {
+        song.play();
+    }
 }
 
 // Strongly recommended: Hide loader after 20 seconds, even if the page hasn't finished loading
@@ -55,7 +65,6 @@ function setup() {
     var c2 = setupCanvas(canvas);
     angleMode(DEGREES); // Unifies lines, delete to have multiple waves
     fft = new p5.FFT();
-    song.play();
     peakDetect = new p5.peakDetect(40, 10000, 0.2, 20);
     background(0);
     stroke(225);
@@ -1453,7 +1462,7 @@ canvas.addEventListener('mousedown', e => {
     let pointer = pointers.find(p => p.id == -1);
     if (pointer == null)
         pointer = new pointerPrototype();
-    updatePointerDownData(pointer, -1, posX, posY);
+    updatePointerDownData(pointer, -1, posX * 8, posY * 8);
 });
 
 canvas.addEventListener('mousemove', e => {
@@ -1461,7 +1470,7 @@ canvas.addEventListener('mousemove', e => {
     if (!pointer.down) return;
     let posX = scaleByPixelRatio(e.offsetX);
     let posY = scaleByPixelRatio(e.offsetY);
-    updatePointerMoveData(pointer, posX, posY);
+    updatePointerMoveData(pointer, posX * 8, posY * 8);
 });
 
 window.addEventListener('mouseup', () => {
@@ -1476,7 +1485,7 @@ canvas.addEventListener('touchstart', e => {
     for (let i = 0; i < touches.length; i++) {
         let posX = scaleByPixelRatio(touches[i].pageX);
         let posY = scaleByPixelRatio(touches[i].pageY);
-        updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
+        updatePointerDownData(pointers[i + 1], touches[i].identifier, posX * 8, posY * 8);
     }
 });
 
@@ -1488,7 +1497,7 @@ canvas.addEventListener('touchmove', e => {
         if (!pointer.down) continue;
         let posX = scaleByPixelRatio(touches[i].pageX);
         let posY = scaleByPixelRatio(touches[i].pageY);
-        updatePointerMoveData(pointer, posX, posY);
+        updatePointerMoveData(pointer, posX * 8, posY * 8);
     }
 }, false);
 
