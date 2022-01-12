@@ -158,7 +158,7 @@ function setupCanvas(c) {
 }
 
 function preload() {
-    songs = [loadSound("spring.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
+    songs = [loadSound("jack1.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
     song = songs[0];
 }
 
