@@ -23,6 +23,7 @@ SOFTWARE.
 var song;
 var fft, peakDetect;
 var particles = [];
+var songs = [];
 var started = false;
 
 function initializePage() {
@@ -51,7 +52,7 @@ function playPause() {
     btn.classList.toggle("fa-pause-circle");
     if (song.isPlaying()) {
         song.pause();
-        btn.toggle
+        btn.toggle;
     } else {
         song.play();
     }
@@ -62,6 +63,83 @@ function playPause() {
         controls.style.webkitAnimationDuration = '2s';
 
         started = true;
+    }
+}
+
+function songChoice(selection) {
+    var btn1, btn2, btn3;
+
+    var btn = document.querySelector('.playPause');
+
+    if (selection == 'spring') {
+        btn1 = document.querySelector('.spring');
+        if (!btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[0];
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == 'song2') {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (!btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[1];
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == "song3") {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (!btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[2];
+        }
     }
 }
 
@@ -80,7 +158,8 @@ function setupCanvas(c) {
 }
 
 function preload() {
-    song = loadSound("spring.mp3")
+    songs = [loadSound("spring.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
+    song = songs[0];
 }
 
 function setup() {

@@ -62,14 +62,15 @@ canvas {
 
 .controlCenter {
     position: relative;
-    margin-top: 45vh;
     height: 10vh;
     width: 30%;
     background: rgba(146, 146, 195, 0.4);
     margin-left: auto;
     margin-right: auto;
     border-radius: 50px;
-    display: table;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     animation-fill-mode: forwards;
 
@@ -89,8 +90,12 @@ button:hover {
 }
 
 .controlCenterContent {
-    display: table-cell;
-    vertical-align: middle;
+    width: 90%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .fa {
@@ -98,12 +103,18 @@ button:hover {
     color: #ffffff;
 }
 
+.content {
+    padding-top: 10vh;
+    color: #ffffff;
+    background-color: #000000;
+}
+
 @-webkit-keyframes slideInDown {
-    100% { top: 0; }
+    100% { top: 40%; }
 }
 
 @keyframes slideInDown {
-    100% { top: 0; }
+    100% { top: 40%; }
 }
 
 @-webkit-keyframes slideOutDown {
@@ -128,12 +139,12 @@ button:hover {
 
 @-webkit-keyframes slideToBottom {
     100% { 
-        margin-top: 88vh;
+        margin-top: 20%;
     }
 }
 
 @keyframes slideToBottom {
     100% { 
-        margin-top: 88vh;
+        margin-top: 20%;
     }
 }
