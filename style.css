@@ -40,6 +40,7 @@ canvas {
     left: 0;
     height: 100%;
     width: 100%;
+    animation-fill-mode: forwards;
 }
 
 .gif{
@@ -51,73 +52,88 @@ canvas {
     width: 100%;
 }
 
-/* .dg {
-    opacity: 0.9;
-}
-
-.dg .property-name {
-    overflow: visible;
-}
-
-.bigFont {
-    font-size: 150%;
-    color: #8C8C8C;
-}
-
-.cr.function.appBigFont {
-    font-size: 150%;
-    line-height: 27px;
-    color: #A5F8D3;
-    background-color: #023C40;
-}
-
-.cr.function.appBigFont .property-name {
-    float: none;
-}
-
-.cr.function.appBigFont .icon {
-    position: sticky;
-    bottom: 27px;
-}
-
-.icon {
-    font-family: 'iconfont';
-    font-size: 130%;
-    float: right;
-}
-
-.twitter:before {
-    content: 'a';
-}
-
-.github:before {
-    content: 'b';
-}
-
-.app:before {
-    content: 'c';
-}
-
-.discord:before {
-    content: 'd';
-}
-
-.link {
+.controlCenterContainer{
     width: 100%;
-    display: inline-block;
+    height: 100%;
+    position: absolute;
+    top: -100vh;
+    animation-fill-mode: forwards;
 }
 
-.link img {
-    width: 100%;
+.controlCenter {
+    position: relative;
+    margin-top: 45vh;
+    height: 10vh;
+    width: 30%;
+    background: rgba(146, 146, 195, 0.4);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px;
+    display: table;
+
+    animation-fill-mode: forwards;
+
+    -webkit-transition: background 0.5s ease-out;
+    -moz-transition: background 0.5s ease-out;
+    -o-transition: background 0.5s ease-out;
+    transition: background 0.5s ease-out;
 }
 
-@keyframes promo-appear-animation {
-    0% {
-        transform: scale(2.0);
-        opacity: 0;
+.controlCenter:hover {
+    background: rgba(146, 146, 195, 0.9);
+    cursor: pointer;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.controlCenterContent {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.fa {
+    font-size: 4rem;
+    color: #ffffff;
+}
+
+@-webkit-keyframes slideInDown {
+    100% { top: 0; }
+}
+
+@keyframes slideInDown {
+    100% { top: 0; }
+}
+
+@-webkit-keyframes slideOutDown {
+    100% { top: -100vh; }
+}
+
+@keyframes slideOutDown {
+    100% { top: 100vh; }
+}
+
+@-webkit-keyframes fadeAway {
+    100% { 
+        background-color: rgba(0,0,0,0);
     }
-    100% {
-        transform: scale(1.0);
-        opacity: 1;
+}
+
+@keyframes fadeAway {
+    100% { 
+        background-color: rgba(0,0,0,0);
     }
-} */
+}
+
+@-webkit-keyframes slideToBottom {
+    100% { 
+        margin-top: 88vh;
+    }
+}
+
+@keyframes slideToBottom {
+    100% { 
+        margin-top: 88vh;
+    }
+}

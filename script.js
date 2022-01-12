@@ -18,28 +18,52 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-console.log('connected')
-
 'use strict';
 
 var song;
 var fft, peakDetect;
-var particles = []
+var particles = [];
+var started = false;
 
-function hideLoader() {
-    document.querySelector('#loading').remove();
+function initializePage() {
+    var l = document.querySelector('#loading');
+    l.style.webkitAnimationName = 'slideOutDown';
+    l.style.webkitAnimationDuration = '2s';
+    var cc = document.querySelector('.controlCenterContainer');
+    cc.style.webkitAnimationName = 'slideInDown';
+    cc.style.webkitAnimationDuration = '2s';
+
+    hideLoading();
+}
+
+function hideLoading() {
+    setTimeout(hide, 2 * 1000);
+}
+
+function hide() {
+    var l = document.querySelector('#loading');
+    l.remove();
 }
 
 function playPause() {
+    var btn = document.querySelector('.playPause');
+    btn.classList.toggle("fa-play-circle");
+    btn.classList.toggle("fa-pause-circle");
     if (song.isPlaying()) {
         song.pause();
+        btn.toggle
     } else {
         song.play();
     }
-}
 
-// Strongly recommended: Hide loader after 20 seconds, even if the page hasn't finished loading
-setTimeout(hideLoader, 5 * 1000);
+    if (!started) {
+        var controls = document.querySelector('.controlCenter');
+        controls.style.webkitAnimationName = 'slideToBottom';
+        controls.style.webkitAnimationDuration = '2s';
+
+        started = true;
+    }
+}
 
 function setupCanvas(c) {
     // Get the device pixel ratio, falling back to 1.
@@ -69,7 +93,7 @@ function setup() {
     background(0);
     stroke(225);
     noFill();
-    hideLoader();
+    initializePage();
 }
 
 function draw() {
