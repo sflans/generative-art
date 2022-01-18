@@ -2,36 +2,27 @@
 <html lang="en">
 
 <head>
-    Dancing Pixels
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
 </head>
-
-<!-- <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-cache">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <link rel="apple-touch-icon" href="logo.png">
-    <link rel="icon" href="logo.png"> -->
 <link href="style.css" rel="stylesheet" type="text/css" />
-<meta name="description" content="A WebGL fluid simulation that works in mobile browsers.">
-
-<!-- <meta property="og:type" content="website">
-    <meta property="og:title" content="Webgl Fluid Simulation">
-    <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
-    <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
-    <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png"> -->
+<meta name="description" content="Digital Art for Cardano.">
 
 <script type="text/javascript" src="dat.gui.min.js"></script>
 
@@ -49,9 +40,26 @@
     <div id="loading">
         <div class="gif"></div>
     </div>
-    <div id='controlCenter'>
-        <button onClick="playPause()">Play</button>
+    <div class="controlCenterContainer">
+        <div class="container2">
+            <div class='controlCenter'>
+                <div class="controlCenterContent">
+                    <i class="fa fa-play-circle playPause" onClick="playPause()"></i>
+
+                    <div class="btn-group" role="group" aria-label="song-choice">
+                        <button type="button" class="btn btn-secondary active spring"
+                            onClick="songChoice('spring')">Just Job</button>
+                        <button type="button" class="btn btn-secondary song2" onClick="songChoice('song2')">Tame
+                            Impala</button>
+                        <button type="button" class="btn btn-secondary song3" onClick="songChoice('song3')">Bob
+                            Marley</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
     <canvas></canvas>
     <div id="content">
         <div class="intro-background">

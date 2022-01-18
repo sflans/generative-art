@@ -18,28 +18,130 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-console.log('connected')
-
 'use strict';
 
 var song;
 var fft, peakDetect;
-var particles = []
+var particles = [];
+var songs = [];
+var started = false;
 
-function hideLoader() {
-    document.querySelector('#loading').remove();
+function initializePage() {
+    var l = document.querySelector('#loading');
+    l.style.webkitAnimationName = 'slideOutDown';
+    l.style.webkitAnimationDuration = '2s';
+    var cc = document.querySelector('.controlCenterContainer');
+    cc.style.webkitAnimationName = 'slideInDown';
+    cc.style.webkitAnimationDuration = '2s';
+
+    hideLoading();
+}
+
+function hideLoading() {
+    setTimeout(hide, 2 * 1000);
+}
+
+function hide() {
+    var l = document.querySelector('#loading');
+    l.remove();
 }
 
 function playPause() {
+    var btn = document.querySelector('.playPause');
+    btn.classList.toggle("fa-play-circle");
+    btn.classList.toggle("fa-pause-circle");
     if (song.isPlaying()) {
         song.pause();
+        btn.toggle;
     } else {
         song.play();
     }
+
+    if (!started) {
+        var controls = document.querySelector('.controlCenter');
+        controls.style.webkitAnimationName = 'slideToBottom';
+        controls.style.webkitAnimationDuration = '2s';
+
+        started = true;
+    }
 }
 
-// Strongly recommended: Hide loader after 20 seconds, even if the page hasn't finished loading
-setTimeout(hideLoader, 5 * 1000);
+function songChoice(selection) {
+    var btn1, btn2, btn3;
+
+    var btn = document.querySelector('.playPause');
+
+    if (selection == 'spring') {
+        btn1 = document.querySelector('.spring');
+        if (!btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[0];
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == 'song2') {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (!btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[1];
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == "song3") {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (!btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[2];
+        }
+    }
+}
 
 function setupCanvas(c) {
     // Get the device pixel ratio, falling back to 1.
@@ -56,7 +158,8 @@ function setupCanvas(c) {
 }
 
 function preload() {
-    song = loadSound("spring.mp3")
+    songs = [loadSound("jack1.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
+    song = songs[0];
 }
 
 function setup() {
@@ -69,7 +172,7 @@ function setup() {
     background(0);
     stroke(225);
     noFill();
-    hideLoader();
+    initializePage();
 }
 
 function draw() {
