@@ -22,98 +22,183 @@ SOFTWARE.
 
 var song;
 var fft, peakDetect;
-var particles = []
+var particles = [];
+var songs = [];
+var started = false;
 
+function initializePage() {
+    var l = document.querySelector('#loading');
+    l.style.webkitAnimationName = 'slideOutDown';
+    l.style.webkitAnimationDuration = '2s';
+    var cc = document.querySelector('.controlCenterContainer');
+    cc.style.webkitAnimationName = 'slideInDown';
+    cc.style.webkitAnimationDuration = '2s';
 
+    hideLoading();
+}
+
+function hideLoading() {
+    setTimeout(hide, 2 * 1000);
+}
+
+function hide() {
+    var l = document.querySelector('#loading');
+    l.remove();
+}
+
+function playPause() {
+    var btn = document.querySelector('.playPause');
+    btn.classList.toggle("fa-play-circle");
+    btn.classList.toggle("fa-pause-circle");
+    if (song.isPlaying()) {
+        song.pause();
+        btn.toggle;
+    } else {
+        song.play();
+    }
+
+    if (!started) {
+        var controls = document.querySelector('.controlCenter');
+        controls.style.webkitAnimationName = 'slideToBottom';
+        controls.style.webkitAnimationDuration = '2s';
+
+        started = true;
+    }
+}
+
+function songChoice(selection) {
+    var btn1, btn2, btn3;
+
+    var btn = document.querySelector('.playPause');
+
+    if (selection == 'spring') {
+        btn1 = document.querySelector('.spring');
+        if (!btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[0];
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == 'song2') {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (!btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[1];
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+        }
+    } else if (selection == "song3") {
+        btn1 = document.querySelector('.spring');
+        if (btn1.classList.contains('active')) {
+            btn1.classList.toggle("active");
+        }
+
+        btn2 = document.querySelector('.song2');
+        if (btn2.classList.contains('active')) {
+            btn2.classList.toggle("active");
+        }
+
+        btn3 = document.querySelector('.song3');
+        if (!btn3.classList.contains('active')) {
+            btn3.classList.toggle("active");
+
+            if (song.isPlaying()) {
+                song.pause();
+                btn.toggle;
+                btn.classList.toggle("fa-play-circle");
+                btn.classList.toggle("fa-pause-circle")
+            }
+            song = songs[2];
+        }
+    }
+}
+
+function setupCanvas(c) {
+    // Get the device pixel ratio, falling back to 1.
+    var dpr = window.devicePixelRatio || 1;
+    dpr = dpr * 8;
+    // Get the size of the canvas in CSS pixels.
+    var rect = canvas.getBoundingClientRect();
+    // Give the canvas pixel dimensions of their CSS
+    // size * the device pixel ratio.
+    c.width = rect.width * dpr;
+    c.height = rect.height * dpr;
+    var ctx = c.getContext('webgl2');
+    return ctx;
+}
 
 function preload() {
-    song = loadSound("spring.mp3")
+    songs = [loadSound("jack1.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
+    song = songs[0];
 }
 
 function setup() {
-    createCanvas(800, 700);
+
+    createCanvas(38400, 21600);
+    var c2 = setupCanvas(canvas);
     angleMode(DEGREES); // Unifies lines, delete to have multiple waves
     fft = new p5.FFT();
-    song.play();
     peakDetect = new p5.peakDetect(40, 10000, 0.2, 20);
+    background(0);
+    stroke(225);
+    noFill();
+    initializePage();
 }
 
 function draw() {
-    background(0);
-    stroke(225)
-    noFill()
 
     translate(width / 2, height / 2)
 
-    var wave = fft.waveform()
+    var wave = fft.waveform();
     fft.analyze();
     peakDetect.update(fft);
 
     if (peakDetect.isDetected) {
-        console.log("peak")
-        multipleSplats(Math.random() * 20 + 5);
+        multipleSplats(Math.random() * 30 + 5);
     }
 
-    for (var t = -1; t <= 1; t += 2) {
-        beginShape()
-        for (var i = 0; i <= 180; i++) {
-            var index = floor(map(i, 0, 180, 0, wave.length - 1))
+    beginShape()
+    for (var i = 0; i <= 180; i++) {
+        var index = floor(map(i, 0, 180, 0, wave.length - 1))
 
-            var r = map(wave[index], -1, 1, 150, 350)
+        var r = map(wave[index], -1, 1, 150, 350)
 
-            var x = r * sin(i)
-            var y = r * cos(i)
-                //point(x, y)
-                //ellipse(x, y/3, 2)
-            vertex(x, y)
-
-        }
-        endShape();
-
-        beginShape();
-        for (var i = 0; i <= 180; i++) {
-            var index = floor(map(i, 0, 180, 0, wave.length - 1))
-
-            var r = map(wave[index], -1, 1, 150, 350)
-
-            var x = r * -sin(i)
-            var y = r * cos(i)
-                //point(x, y)
-                //ellipse(x, y/3, 2)
-            vertex(x, y)
-
-        }
-        endShape()
+        var x = r * sin(i)
+        var y = r * cos(i)
+        vertex(x, y)
 
     }
-
-    // var p = new Particle()
-    // particles.push(p)
-
-    for (var i = 0; i < particles.length; i++) {
-        particles[i].update()
-        particles[i].show()
-    }
-
-}
-
-
-class Particle {
-    constructor() {
-        this.vel = createVector(0, 0)
-        this.pos = p5.Vector.random2D().mult(20)
-        this.acc = this.pos.copy().mult(random(0.00001, 0.00001))
-        this.w = random(3, 5)
-    }
-    update() {
-        this.vel.add(this.acc)
-        this.pos.add(this.vel)
-    }
-    show() {
-        noStroke();
-        fill(255);
-        ellipse(this.pos.x, this.pos.y, this.w)
-    }
+    endShape();
 }
 
 
@@ -131,31 +216,15 @@ if (isMobile()) {
     }, 20000);
 }
 
-promoPopupClose.addEventListener('click', e => {
-    promoPopup.style.display = 'none';
-});
-
-const appleLink = document.getElementById('apple_link');
-appleLink.addEventListener('click', e => {
-    ga('send', 'event', 'link promo', 'app');
-    window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-});
-
-const googleLink = document.getElementById('google_link');
-googleLink.addEventListener('click', e => {
-    ga('send', 'event', 'link promo', 'app');
-    window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-});
-
 // Simulation section
 
 const canvas = document.getElementsByTagName('canvas')[0];
-resizeCanvas();
+// resizeCanvas();
 
 let config = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1024,
-    CAPTURE_RESOLUTION: 512,
+    CAPTURE_RESOLUTION: 2048,
     DENSITY_DISSIPATION: 1,
     VELOCITY_DISSIPATION: 0.2,
     PRESSURE: 0.8,
@@ -163,19 +232,19 @@ let config = {
     CURL: 30,
     SPLAT_RADIUS: 0.25,
     SPLAT_FORCE: 6000,
-    SHADING: true,
+    SHADING: false,
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 10,
     PAUSED: false,
     BACK_COLOR: { r: 0, g: 0, b: 0 },
     TRANSPARENT: false,
-    BLOOM: true,
+    BLOOM: false,
     BLOOM_ITERATIONS: 8,
     BLOOM_RESOLUTION: 256,
     BLOOM_INTENSITY: 0.8,
     BLOOM_THRESHOLD: 0.6,
     BLOOM_SOFT_KNEE: 0.7,
-    SUNRAYS: true,
+    SUNRAYS: false,
     SUNRAYS_RESOLUTION: 196,
     SUNRAYS_WEIGHT: 1.0,
 }
@@ -206,10 +275,10 @@ if (!ext.supportLinearFiltering) {
     config.DYE_RESOLUTION = 512;
     config.SHADING = false;
     config.BLOOM = false;
-    config.SUNRAYS = false;
+    // config.SUNRAYS = false;
 }
 
-startGUI();
+// startGUI();
 
 function getWebGLContext(canvas) {
     const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -297,16 +366,16 @@ function supportRenderTextureFormat(gl, internalFormat, format, type) {
 
 function startGUI() {
     var gui = new dat.GUI({ width: 300 });
-    // gui.add(config, 'DYE_RESOLUTION', { 'high': 1024, 'medium': 512, 'low': 256, 'very low': 128 }).name('quality').onFinishChange(initFramebuffers);
-    // gui.add(config, 'SIM_RESOLUTION', { '32': 32, '64': 64, '128': 128, '256': 256 }).name('sim resolution').onFinishChange(initFramebuffers);
-    // gui.add(config, 'DENSITY_DISSIPATION', 0, 4.0).name('density diffusion');
-    // gui.add(config, 'VELOCITY_DISSIPATION', 0, 4.0).name('velocity diffusion');
-    // gui.add(config, 'PRESSURE', 0.0, 1.0).name('pressure');
-    // gui.add(config, 'CURL', 0, 50).name('vorticity').step(1);
-    // gui.add(config, 'SPLAT_RADIUS', 0.01, 1.0).name('splat radius');
-    // gui.add(config, 'SHADING').name('shading').onFinishChange(updateKeywords);
-    // gui.add(config, 'COLORFUL').name('colorful');
-    // gui.add(config, 'PAUSED').name('paused').listen();
+    gui.add(config, 'DYE_RESOLUTION', { 'high': 1024, 'medium': 512, 'low': 256, 'very low': 128 }).name('quality').onFinishChange(initFramebuffers);
+    gui.add(config, 'SIM_RESOLUTION', { '32': 32, '64': 64, '128': 128, '256': 256 }).name('sim resolution').onFinishChange(initFramebuffers);
+    gui.add(config, 'DENSITY_DISSIPATION', 0, 4.0).name('density diffusion');
+    gui.add(config, 'VELOCITY_DISSIPATION', 0, 4.0).name('velocity diffusion');
+    gui.add(config, 'PRESSURE', 0.0, 1.0).name('pressure');
+    gui.add(config, 'CURL', 0, 50).name('vorticity').step(1);
+    gui.add(config, 'SPLAT_RADIUS', 0.01, 1.0).name('splat radius');
+    gui.add(config, 'SHADING').name('shading').onFinishChange(updateKeywords);
+    gui.add(config, 'COLORFUL').name('colorful');
+    gui.add(config, 'PAUSED').name('paused').listen();
 
     gui.add({
         fun: () => {
@@ -319,54 +388,62 @@ function startGUI() {
     bloomFolder.add(config, 'BLOOM_INTENSITY', 0.1, 2.0).name('intensity');
     bloomFolder.add(config, 'BLOOM_THRESHOLD', 0.0, 1.0).name('threshold');
 
-    // let sunraysFolder = gui.addFolder('Sunrays');
-    // sunraysFolder.add(config, 'SUNRAYS').name('enabled').onFinishChange(updateKeywords);
-    // sunraysFolder.add(config, 'SUNRAYS_WEIGHT', 0.3, 1.0).name('weight');
+    let sunraysFolder = gui.addFolder('Sunrays');
+    sunraysFolder.add(config, 'SUNRAYS').name('enabled').onFinishChange(updateKeywords);
+    sunraysFolder.add(config, 'SUNRAYS_WEIGHT', 0.3, 1.0).name('weight');
 
-    // let captureFolder = gui.addFolder('Capture');
-    // captureFolder.addColor(config, 'BACK_COLOR').name('background color');
-    // captureFolder.add(config, 'TRANSPARENT').name('transparent');
-    // captureFolder.add({ fun: captureScreenshot }, 'fun').name('take screenshot');
+    let captureFolder = gui.addFolder('Capture');
+    captureFolder.addColor(config, 'BACK_COLOR').name('background color');
+    captureFolder.add(config, 'TRANSPARENT').name('transparent');
+    captureFolder.add({ fun: captureScreenshot }, 'fun').name('take screenshot');
 
-    // let github = gui.add({ fun : () => {
-    //     window.open('https://github.com/PavelDoGreat/WebGL-Fluid-Simulation');
-    //     ga('send', 'event', 'link button', 'github');
-    // } }, 'fun').name('Github');
-    // github.__li.className = 'cr function bigFont';
-    // github.__li.style.borderLeft = '3px solid #8C8C8C';
-    // let githubIcon = document.createElement('span');
-    // github.domElement.parentElement.appendChild(githubIcon);
-    // githubIcon.className = 'icon github';
+    let github = gui.add({
+        fun: () => {
+            window.open('https://github.com/PavelDoGreat/WebGL-Fluid-Simulation');
+            ga('send', 'event', 'link button', 'github');
+        }
+    }, 'fun').name('Github');
+    github.__li.className = 'cr function bigFont';
+    github.__li.style.borderLeft = '3px solid #8C8C8C';
+    let githubIcon = document.createElement('span');
+    github.domElement.parentElement.appendChild(githubIcon);
+    githubIcon.className = 'icon github';
 
-    // let twitter = gui.add({ fun : () => {
-    //     ga('send', 'event', 'link button', 'twitter');
-    //     window.open('https://twitter.com/PavelDoGreat');
-    // } }, 'fun').name('Twitter');
-    // twitter.__li.className = 'cr function bigFont';
-    // twitter.__li.style.borderLeft = '3px solid #8C8C8C';
-    // let twitterIcon = document.createElement('span');
-    // twitter.domElement.parentElement.appendChild(twitterIcon);
-    // twitterIcon.className = 'icon twitter';
+    let twitter = gui.add({
+        fun: () => {
+            ga('send', 'event', 'link button', 'twitter');
+            window.open('https://twitter.com/PavelDoGreat');
+        }
+    }, 'fun').name('Twitter');
+    twitter.__li.className = 'cr function bigFont';
+    twitter.__li.style.borderLeft = '3px solid #8C8C8C';
+    let twitterIcon = document.createElement('span');
+    twitter.domElement.parentElement.appendChild(twitterIcon);
+    twitterIcon.className = 'icon twitter';
 
-    // let discord = gui.add({ fun : () => {
-    //     ga('send', 'event', 'link button', 'discord');
-    //     window.open('https://discordapp.com/invite/CeqZDDE');
-    // } }, 'fun').name('Discord');
-    // discord.__li.className = 'cr function bigFont';
-    // discord.__li.style.borderLeft = '3px solid #8C8C8C';
-    // let discordIcon = document.createElement('span');
-    // discord.domElement.parentElement.appendChild(discordIcon);
-    // discordIcon.className = 'icon discord';
+    let discord = gui.add({
+        fun: () => {
+            ga('send', 'event', 'link button', 'discord');
+            window.open('https://discordapp.com/invite/CeqZDDE');
+        }
+    }, 'fun').name('Discord');
+    discord.__li.className = 'cr function bigFont';
+    discord.__li.style.borderLeft = '3px solid #8C8C8C';
+    let discordIcon = document.createElement('span');
+    discord.domElement.parentElement.appendChild(discordIcon);
+    discordIcon.className = 'icon discord';
 
-    // let app = gui.add({ fun : () => {
-    //     ga('send', 'event', 'link button', 'app');
-    //     window.open('http://onelink.to/5b58bn');
-    // } }, 'fun').name('Check out mobile app');
-    // app.__li.className = 'cr function appBigFont';
-    // app.__li.style.borderLeft = '3px solid #00FF7F';
-    // let appIcon = document.createElement('span');
-    // app.domElement.parentElement.appendChild(appIcon);
-    // appIcon.className = 'icon app';
+    let app = gui.add({
+        fun: () => {
+            ga('send', 'event', 'link button', 'app');
+            window.open('http://onelink.to/5b58bn');
+        }
+    }, 'fun').name('Check out mobile app');
+    app.__li.className = 'cr function appBigFont';
+    app.__li.style.borderLeft = '3px solid #00FF7F';
+    let appIcon = document.createElement('span');
+    app.domElement.parentElement.appendChild(appIcon);
+    appIcon.className = 'icon app';
 
     if (isMobile())
         gui.close();
@@ -556,7 +633,7 @@ const blurVertexShader = compileShader(gl.VERTEX_SHADER, `
     uniform vec2 texelSize;
     void main () {
         vUv = aPosition * 0.5 + 0.5;
-        float offset = 1.33333333;
+        float offset = 1.33;
         vL = vUv - texelSize * offset;
         vR = vUv + texelSize * offset;
         gl_Position = vec4(aPosition, 0.0, 1.0);
@@ -745,32 +822,32 @@ const sunraysMaskShader = compileShader(gl.FRAGMENT_SHADER, `
     }
 `);
 
-const sunraysShader = compileShader(gl.FRAGMENT_SHADER, `
-    precision highp float;
-    precision highp sampler2D;
-    varying vec2 vUv;
-    uniform sampler2D uTexture;
-    uniform float weight;
-    #define ITERATIONS 16
-    void main () {
-        float Density = 0.3;
-        float Decay = 0.95;
-        float Exposure = 0.7;
-        vec2 coord = vUv;
-        vec2 dir = vUv - 0.5;
-        dir *= 1.0 / float(ITERATIONS) * Density;
-        float illuminationDecay = 1.0;
-        float color = texture2D(uTexture, vUv).a;
-        for (int i = 0; i < ITERATIONS; i++)
-        {
-            coord -= dir;
-            float col = texture2D(uTexture, coord).a;
-            color += col * illuminationDecay * weight;
-            illuminationDecay *= Decay;
-        }
-        gl_FragColor = vec4(color * Exposure, 0.0, 0.0, 1.0);
-    }
-`);
+// const sunraysShader = compileShader(gl.FRAGMENT_SHADER, `
+//     precision highp float;
+//     precision highp sampler2D;
+//     varying vec2 vUv;
+//     uniform sampler2D uTexture;
+//     uniform float weight;
+//     #define ITERATIONS 16
+//     void main () {
+//         float Density = 0.3;
+//         float Decay = 0.95;
+//         float Exposure = 0.7;
+//         vec2 coord = vUv;
+//         vec2 dir = vUv - 0.5;
+//         dir *= 1.0 / float(ITERATIONS) * Density;
+//         float illuminationDecay = 1.0;
+//         float color = texture2D(uTexture, vUv).a;
+//         for (int i = 0; i < ITERATIONS; i++)
+//         {
+//             coord -= dir;
+//             float col = texture2D(uTexture, coord).a;
+//             color += col * illuminationDecay * weight;
+//             illuminationDecay *= Decay;
+//         }
+//         gl_FragColor = vec4(color * Exposure, 0.0, 0.0, 1.0);
+//     }
+// `);
 
 const splatShader = compileShader(gl.FRAGMENT_SHADER, `
     precision highp float;
@@ -990,8 +1067,8 @@ const checkerboardProgram = new Program(baseVertexShader, checkerboardShader);
 const bloomPrefilterProgram = new Program(baseVertexShader, bloomPrefilterShader);
 const bloomBlurProgram = new Program(baseVertexShader, bloomBlurShader);
 const bloomFinalProgram = new Program(baseVertexShader, bloomFinalShader);
-const sunraysMaskProgram = new Program(baseVertexShader, sunraysMaskShader);
-const sunraysProgram = new Program(baseVertexShader, sunraysShader);
+// const sunraysMaskProgram = new Program(baseVertexShader, sunraysMaskShader);
+// const sunraysProgram = new Program(baseVertexShader, sunraysShader);
 const splatProgram = new Program(baseVertexShader, splatShader);
 const advectionProgram = new Program(baseVertexShader, advectionShader);
 const divergenceProgram = new Program(baseVertexShader, divergenceShader);
@@ -1029,7 +1106,7 @@ function initFramebuffers() {
     pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
 
     initBloomFramebuffers();
-    initSunraysFramebuffers();
+    // initSunraysFramebuffers();
 }
 
 function initBloomFramebuffers() {
@@ -1053,16 +1130,16 @@ function initBloomFramebuffers() {
     }
 }
 
-function initSunraysFramebuffers() {
-    let res = getResolution(config.SUNRAYS_RESOLUTION);
+// function initSunraysFramebuffers() {
+//     let res = getResolution(config.SUNRAYS_RESOLUTION);
 
-    const texType = ext.halfFloatTexType;
-    const r = ext.formatR;
-    const filtering = ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
+//     const texType = ext.halfFloatTexType;
+//     const r = ext.formatR;
+//     const filtering = ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
 
-    sunrays = createFBO(res.width, res.height, r.internalFormat, r.format, texType, filtering);
-    sunraysTemp = createFBO(res.width, res.height, r.internalFormat, r.format, texType, filtering);
-}
+//     sunrays = createFBO(res.width, res.height, r.internalFormat, r.format, texType, filtering);
+//     sunraysTemp = createFBO(res.width, res.height, r.internalFormat, r.format, texType, filtering);
+// }
 
 function createFBO(w, h, internalFormat, format, type, param) {
     gl.activeTexture(gl.TEXTURE0);
@@ -1183,13 +1260,13 @@ function updateKeywords() {
     let displayKeywords = [];
     if (config.SHADING) displayKeywords.push("SHADING");
     if (config.BLOOM) displayKeywords.push("BLOOM");
-    if (config.SUNRAYS) displayKeywords.push("SUNRAYS");
+    // if (config.SUNRAYS) displayKeywords.push("SUNRAYS");
     displayMaterial.setKeywords(displayKeywords);
 }
 
 updateKeywords();
 initFramebuffers();
-multipleSplats(parseInt(Math.random() * 20) + 5);
+// multipleSplats(parseInt(Math.random() * 20) + 5);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1197,8 +1274,8 @@ update();
 
 function update() {
     const dt = calcDeltaTime();
-    if (resizeCanvas())
-        initFramebuffers();
+    // if (resizeCanvas())
+    //     initFramebuffers();
     updateColors(dt);
     applyInputs();
     if (!config.PAUSED)
@@ -1215,16 +1292,16 @@ function calcDeltaTime() {
     return dt;
 }
 
-function resizeCanvas() {
-    let width = scaleByPixelRatio(canvas.clientWidth);
-    let height = scaleByPixelRatio(canvas.clientHeight);
-    if (canvas.width != width || canvas.height != height) {
-        canvas.width = width;
-        canvas.height = height;
-        return true;
-    }
-    return false;
-}
+// function resizeCanvas() {
+//     let width = scaleByPixelRatio(canvas.clientWidth);
+//     let height = scaleByPixelRatio(canvas.clientHeight);
+//     if (canvas.width != width || canvas.height != height) {
+//         canvas.width = width;
+//         canvas.height = height;
+//         return true;
+//     }
+//     return false;
+// }
 
 function updateColors(dt) {
     if (!config.COLORFUL) return;
@@ -1318,10 +1395,10 @@ function step(dt) {
 function render(target) {
     if (config.BLOOM)
         applyBloom(dye.read, bloom);
-    if (config.SUNRAYS) {
-        applySunrays(dye.read, dye.write, sunrays);
-        blur(sunrays, sunraysTemp, 1);
-    }
+    // if (config.SUNRAYS) {
+    //     applySunrays(dye.read, dye.write, sunrays);
+    //     blur(sunrays, sunraysTemp, 1);
+    // }
 
     if (target == null || !config.TRANSPARENT) {
         gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -1363,8 +1440,8 @@ function drawDisplay(target) {
         let scale = getTextureScale(ditheringTexture, width, height);
         gl.uniform2f(displayMaterial.uniforms.ditherScale, scale.x, scale.y);
     }
-    if (config.SUNRAYS)
-        gl.uniform1i(displayMaterial.uniforms.uSunrays, sunrays.attach(3));
+    // if (config.SUNRAYS)
+    //     gl.uniform1i(displayMaterial.uniforms.uSunrays, sunrays.attach(3));
     blit(target);
 }
 
@@ -1414,17 +1491,17 @@ function applyBloom(source, destination) {
     blit(destination);
 }
 
-function applySunrays(source, mask, destination) {
-    gl.disable(gl.BLEND);
-    sunraysMaskProgram.bind();
-    gl.uniform1i(sunraysMaskProgram.uniforms.uTexture, source.attach(0));
-    blit(mask);
+// function applySunrays(source, mask, destination) {
+//     gl.disable(gl.BLEND);
+//     sunraysMaskProgram.bind();
+//     gl.uniform1i(sunraysMaskProgram.uniforms.uTexture, source.attach(0));
+//     blit(mask);
 
-    sunraysProgram.bind();
-    gl.uniform1f(sunraysProgram.uniforms.weight, config.SUNRAYS_WEIGHT);
-    gl.uniform1i(sunraysProgram.uniforms.uTexture, mask.attach(0));
-    blit(destination);
-}
+//     sunraysProgram.bind();
+//     gl.uniform1f(sunraysProgram.uniforms.weight, config.SUNRAYS_WEIGHT);
+//     gl.uniform1i(sunraysProgram.uniforms.uTexture, mask.attach(0));
+//     blit(destination);
+// }
 
 function blur(target, temp, iterations) {
     blurProgram.bind();
@@ -1488,7 +1565,7 @@ canvas.addEventListener('mousedown', e => {
     let pointer = pointers.find(p => p.id == -1);
     if (pointer == null)
         pointer = new pointerPrototype();
-    updatePointerDownData(pointer, -1, posX, posY);
+    updatePointerDownData(pointer, -1, posX * 8, posY * 8);
 });
 
 canvas.addEventListener('mousemove', e => {
@@ -1496,7 +1573,7 @@ canvas.addEventListener('mousemove', e => {
     if (!pointer.down) return;
     let posX = scaleByPixelRatio(e.offsetX);
     let posY = scaleByPixelRatio(e.offsetY);
-    updatePointerMoveData(pointer, posX, posY);
+    updatePointerMoveData(pointer, posX * 8, posY * 8);
 });
 
 window.addEventListener('mouseup', () => {
@@ -1511,7 +1588,7 @@ canvas.addEventListener('touchstart', e => {
     for (let i = 0; i < touches.length; i++) {
         let posX = scaleByPixelRatio(touches[i].pageX);
         let posY = scaleByPixelRatio(touches[i].pageY);
-        updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
+        updatePointerDownData(pointers[i + 1], touches[i].identifier, posX * 8, posY * 8);
     }
 });
 
@@ -1523,7 +1600,7 @@ canvas.addEventListener('touchmove', e => {
         if (!pointer.down) continue;
         let posX = scaleByPixelRatio(touches[i].pageX);
         let posY = scaleByPixelRatio(touches[i].pageY);
-        updatePointerMoveData(pointer, posX, posY);
+        updatePointerMoveData(pointer, posX * 8, posY * 8);
     }
 }, false);
 
