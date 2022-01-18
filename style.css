@@ -3,6 +3,11 @@
     src: url('iconfont.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Lemon';
+    src: url(LEMONMILK-Regular.otf);
+}
+
 * {
     user-select: none;
 }
@@ -14,21 +19,55 @@ main {
 html,
 body {
     overflow-x: hidden;
-    background-color: #f7f7f7;
+    background-color: #2e3134;
 }
 
 body {
     margin: 0px;
     padding: 0px;
     width: 100%;
-    max-height: 200vh !important;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
+.intro {
+    font-weight: 100;
+    font-family: 'Lemon';
+    font-size: 100px;
+    text-align: center;
+    background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 10s infinite linear;
+}
+
+.project-info {
+    font-family: 'Lemon';
+    font-size: 50px;
+    text-align: center;
+    padding: 2%;
+    color: cadetblue;
+}
+
+.site-links {
+    font-family: 'Lemon';
+    font-size: 20px;
+    text-align: center;
+    color: cadetblue;
+}
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
 canvas {
+    padding: 5%;
     display: block;
-    width: 100vw;
+    width: 90vw;
     overflow: hidden;
     position: static;
 }
@@ -43,14 +82,14 @@ canvas {
     animation-fill-mode: forwards;
 }
 
-.gif{
+.gif {
     background: url('loading.gif') no-repeat center center;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-}
+
 
 .controlCenterContainer{
     width: 100%;
