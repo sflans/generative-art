@@ -3,6 +3,11 @@
     src: url('iconfont.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Lemon';
+    src: url(LEMONMILK-Regular.otf);
+}
+
 * {
     user-select: none;
 }
@@ -14,21 +19,55 @@ main {
 html,
 body {
     overflow-x: hidden;
-    background-color: #f7f7f7;
+    background-color: #2e3134;
 }
 
 body {
     margin: 0px;
     padding: 0px;
     width: 100%;
-    max-height: 200vh !important;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
+.intro {
+    font-weight: 100;
+    font-family: 'Lemon';
+    font-size: 100px;
+    text-align: center;
+    background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 10s infinite linear;
+}
+
+.project-info {
+    font-family: 'Lemon';
+    font-size: 50px;
+    text-align: center;
+    padding: 2%;
+    color: cadetblue;
+}
+
+.site-links {
+    font-family: 'Lemon';
+    font-size: 20px;
+    text-align: center;
+    color: cadetblue;
+}
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
 canvas {
+    padding: 5%;
     display: block;
-    width: 100vw;
+    width: 90vw;
     overflow: hidden;
     position: static;
 }
@@ -42,7 +81,7 @@ canvas {
     width: 100%;
 }
 
-.gif{
+.gif {
     background: url('loading.gif') no-repeat center center;
     position: absolute;
     top: 0;
@@ -50,74 +89,3 @@ canvas {
     height: 100%;
     width: 100%;
 }
-
-/* .dg {
-    opacity: 0.9;
-}
-
-.dg .property-name {
-    overflow: visible;
-}
-
-.bigFont {
-    font-size: 150%;
-    color: #8C8C8C;
-}
-
-.cr.function.appBigFont {
-    font-size: 150%;
-    line-height: 27px;
-    color: #A5F8D3;
-    background-color: #023C40;
-}
-
-.cr.function.appBigFont .property-name {
-    float: none;
-}
-
-.cr.function.appBigFont .icon {
-    position: sticky;
-    bottom: 27px;
-}
-
-.icon {
-    font-family: 'iconfont';
-    font-size: 130%;
-    float: right;
-}
-
-.twitter:before {
-    content: 'a';
-}
-
-.github:before {
-    content: 'b';
-}
-
-.app:before {
-    content: 'c';
-}
-
-.discord:before {
-    content: 'd';
-}
-
-.link {
-    width: 100%;
-    display: inline-block;
-}
-
-.link img {
-    width: 100%;
-}
-
-@keyframes promo-appear-animation {
-    0% {
-        transform: scale(2.0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1.0);
-        opacity: 1;
-    }
-} */
