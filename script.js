@@ -158,7 +158,7 @@ function setupCanvas(c) {
 }
 
 function preload() {
-    songs = [loadSound("jack1.mp3"), loadSound("TLIKTB.mp3"), loadSound("isThisLove.mp3")];
+    songs = [loadSound("jack1.mp3"), loadSound("believe.mp3"), loadSound("isThisLove.mp3")];
     song = songs[0];
 }
 
@@ -168,7 +168,7 @@ function setup() {
     var c2 = setupCanvas(canvas);
     angleMode(DEGREES); // Unifies lines, delete to have multiple waves
     fft = new p5.FFT();
-    peakDetect = new p5.peakDetect(40, 10000, 0.2, 20);
+    peakDetect = new p5.peakDetect(20, 5000, 0.35, 10);
     background(0);
     stroke(225);
     noFill();
