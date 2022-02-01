@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
 </head>
@@ -47,8 +40,7 @@
                     <i class="fa fa-play-circle playPause" onClick="playPause()"></i>
 
                     <div class="btn-group" role="group" aria-label="song-choice">
-                        <button type="button" class="btn btn-secondary active spring"
-                            onClick="songChoice('spring')">Just Job</button>
+                        <button type="button" class="btn btn-secondary active spring" onClick="songChoice('spring')">Just Job</button>
                         <button type="button" class="btn btn-secondary song2" onClick="songChoice('song2')">Mecha
                             95</button>
                         <button type="button" class="btn btn-secondary song3" onClick="songChoice('song3')">Bob
@@ -61,18 +53,85 @@
     </div>
 
     <canvas></canvas>
-    <div id="content">
-        <div class="intro-background">
-            <div class="intro">
+    <div id="heading-content">
+        <div class="name-background">
+            <div class="name">
                 Dancing Pixels
             </div>
         </div>
-        <div class="project-info">
+        <div class="project-desc">
             Bringing The Worlds of Music and Art Together in a Creative Way.
         </div>
-        <div class="site-links">
-            Follow Us On Twitter
+        <div class="About">
+            About
         </div>
+    </div>
+
+    <div id="main-content">
+        <div class="header">
+            What We Do
+            <div class="sub-header">
+                <p>
+                    we partner with musicians to create one-of-a-kind generative art pieces on the cardano blockchain. Holding our art provides access to special events, discounts, and other surprises.
+                </p>
+            </div>
+        </div>
+
+        <div class="header">
+            How It's Made
+            <div class="sub-header">
+                <p>
+                    we create algorithms that can generate art by listening to music we play for them. we feed these algorithms songs from our partner musicians to create unique art each and every time.
+                </p>
+
+                <p>
+                    Each piece uses a variety of random attributes to determine how the algorithm will construct the art. Some attributes are rarer than others.
+                </p>
+            </div>
+        </div>
+
+        <div class="header">
+            12 Epics
+            <div class="sub-header">
+                <p>
+                    there will be a total of 7150 dancing pixels. These will be released in a series of 8 epics. Each epic will increase in total supply and price to mint. Epic001 will start at 20 ADA and consist of 100 cnfts. Each epic will increase in price by 10 ADA and
+                    the number of cnft's released in each drop will also increases.
+                </p>
+
+                <p>
+                    the price of the earliest epic held at the time of minting future dancing pixels will be the price paid to mint. For example, holding a dancing pixels cnft from epic001 will allow minting dancing pixels cnfts from all future epics for 30 ada, regardless
+                    of their rising price.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="partners">
+        <div class="About">
+            musical partners
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col1">
+                    <img class="artist-image" src="mecha95.png">
+                </div>
+                <div class="col2">
+                    <div class="row1">
+                        Mecha 95
+                    </div>
+
+                    <div class="row2">
+                        Musician description
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 
 </body>
