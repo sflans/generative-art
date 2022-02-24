@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 @font-face {
     font-family: 'iconfont';
     src: url('iconfont.ttf') format('truetype');
@@ -8,6 +9,16 @@
     src: url(LEMONMILK-Regular.otf);
 }
 
+@font-face {
+    font-family: 'Akira';
+    src: url("Akira Expanded Demo.otf");
+}
+
+@font-face {
+    font-family: 'Cooper';
+    src: url("CooperFiveOpti-Black.otf");
+}
+
 * {
     user-select: none;
 }
@@ -16,10 +27,19 @@ main {
     display: none;
 }
 
+
+/* ul {
+    text-align: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+} */
+
 html,
 body {
     overflow-x: hidden;
-    background-color: #2e3134;
+    background-color: #C1BBDD;
+    /* background-color: #B4CAD9; */
 }
 
 body {
@@ -29,9 +49,14 @@ body {
     overflow-x: hidden;
 }
 
-.intro {
+.fa {
+    text-align: center;
+}
+
+.name {
+    padding-top: 3%;
     font-weight: 100;
-    font-family: 'Lemon';
+    font-family: 'Akira';
     font-size: 100px;
     text-align: center;
     background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
@@ -40,19 +65,64 @@ body {
     -webkit-animation: hue 10s infinite linear;
 }
 
-.project-info {
-    font-family: 'Lemon';
+.project-desc {
+    font-family: 'Akira';
     font-size: 50px;
     text-align: center;
     padding: 2%;
-    color: cadetblue;
+    color: #F5FF73;
 }
 
-.site-links {
-    font-family: 'Lemon';
-    font-size: 20px;
+
+/* About Section */
+
+.About {
+    padding-top: 3%;
+    font-family: 'Akira';
+    font-size: 70px;
     text-align: center;
-    color: cadetblue;
+    color: #F5FF73;
+}
+
+.header {
+    padding-left: 13%;
+    padding-right: 13%;
+    text-align: left;
+    font-family: 'Akira';
+    font-size: 40px;
+    color: #F5FF73;
+}
+
+.sub-header {
+    padding-bottom: 15px;
+    font-family: 'Lemon';
+    font-size: 25px;
+    color: white;
+}
+
+
+/* Musical Partner Section */
+
+.container {
+    padding: 5%;
+    font-size: 40px;
+    font-family: 'Lemon', cursive;
+}
+
+.artist-image {
+    height: 400px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.col-6 {
+    font-size: 25px;
+    padding-left: 5%;
+    color: white !important;
+}
+
+.row {
+    padding-top: 5%;
 }
 
 @-webkit-keyframes hue {
@@ -65,7 +135,7 @@ body {
 }
 
 canvas {
-    padding: 5%;
+    margin: auto;
     display: block;
     width: 90vw;
     overflow: hidden;
@@ -89,11 +159,11 @@ canvas {
     left: 0;
     height: 100%;
     width: 100%;
+}
 
-
-.controlCenterContainer{
+.controlCenterContainer {
     width: 100%;
-    height: 100%;
+    height: 10%;
     position: absolute;
     top: -100vh;
     animation-fill-mode: forwards;
@@ -110,9 +180,7 @@ canvas {
     display: flex;
     flex-direction: row;
     align-items: center;
-
     animation-fill-mode: forwards;
-
     -webkit-transition: background 0.5s ease-out;
     -moz-transition: background 0.5s ease-out;
     -o-transition: background 0.5s ease-out;
@@ -149,41 +217,50 @@ button:hover {
 }
 
 @-webkit-keyframes slideInDown {
-    100% { top: 40%; }
+    100% {
+        top: 40%;
+    }
 }
 
 @keyframes slideInDown {
-    100% { top: 40%; }
+    100% {
+        top: 40%;
+    }
 }
 
 @-webkit-keyframes slideOutDown {
-    100% { top: -100vh; }
+    100% {
+        top: -100vh;
+    }
 }
 
 @keyframes slideOutDown {
-    100% { top: 100vh; }
+    100% {
+        top: 100vh;
+    }
 }
 
 @-webkit-keyframes fadeAway {
-    100% { 
-        background-color: rgba(0,0,0,0);
+    100% {
+        background-color: rgba(0, 0, 0, 0);
     }
 }
 
 @keyframes fadeAway {
-    100% { 
-        background-color: rgba(0,0,0,0);
+    100% {
+        background-color: rgba(0, 0, 0, 0);
     }
 }
 
-@-webkit-keyframes slideToBottom {
-    100% { 
+
+/* @-webkit-keyframes slideToBottom {
+    100% {
         margin-top: 20%;
     }
 }
 
 @keyframes slideToBottom {
-    100% { 
+    100% {
         margin-top: 20%;
     }
-}
+} */
