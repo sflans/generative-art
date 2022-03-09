@@ -67,7 +67,7 @@ function playPause() {
 }
 
 function songChoice(selection) {
-    var btn1, btn2, btn3;
+    var btn1, btn2;
 
     var btn = document.querySelector('.playPause');
 
@@ -90,10 +90,6 @@ function songChoice(selection) {
             btn2.classList.toggle("active");
         }
 
-        btn3 = document.querySelector('.song3');
-        if (btn3.classList.contains('active')) {
-            btn3.classList.toggle("active");
-        }
     } else if (selection == 'song2') {
         btn1 = document.querySelector('.spring');
         if (btn1.classList.contains('active')) {
@@ -113,33 +109,6 @@ function songChoice(selection) {
             song = songs[1];
         }
 
-        btn3 = document.querySelector('.song3');
-        if (btn3.classList.contains('active')) {
-            btn3.classList.toggle("active");
-        }
-    } else if (selection == "song3") {
-        btn1 = document.querySelector('.spring');
-        if (btn1.classList.contains('active')) {
-            btn1.classList.toggle("active");
-        }
-
-        btn2 = document.querySelector('.song2');
-        if (btn2.classList.contains('active')) {
-            btn2.classList.toggle("active");
-        }
-
-        btn3 = document.querySelector('.song3');
-        if (!btn3.classList.contains('active')) {
-            btn3.classList.toggle("active");
-
-            if (song.isPlaying()) {
-                song.pause();
-                btn.toggle;
-                btn.classList.toggle("fa-play-circle");
-                btn.classList.toggle("fa-pause-circle")
-            }
-            song = songs[2];
-        }
     }
 }
 
