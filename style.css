@@ -291,6 +291,11 @@ canvas {
     margin-bottom: 10vh;
 }
 
+.partner{
+    width: 50%;
+    margin: auto;
+}
+
 .musical-partners {
     font-family: 'Akira';
     font-size: 4rem;
@@ -340,6 +345,9 @@ canvas {
 }
 
 @media only screen and (max-width: 650px) {
+    .partner{
+        width: 80%;
+    }
     .musical-partners {
         font-size: 3.5rem;
     }
