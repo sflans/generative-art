@@ -31,7 +31,7 @@ body {
     overflow-x: hidden;
     /* background-color: #C1BBDD; */
     background: rgb(193,187,221);
-    background: linear-gradient(115deg, rgba(193,187,221,1) 0%, rgba(93,175,208,0.4) 50%);
+    background: linear-gradient(135deg, rgba(193,187,221,1) 0%, rgba(93,175,208,0.3) 50%);
 }
 body {
     margin: 0px;
@@ -123,6 +123,18 @@ button:hover {
     padding-top: 10vh;
     color: #ffffff;
     background-color: #000000;
+}
+
+.btn {
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    color: #ffffff;
+}
+
+.btn.active {
+    background-color: rgba(0,0,0,0.2);
+    border: none;
+    color: #ffffff;
 }
 
 @media only screen and (max-width: 900px) {
@@ -276,7 +288,7 @@ canvas {
 
 /* Musical Partner Section */
 .partners {
-    margin-bottom: 10%;
+    margin-bottom: 10vh;
 }
 
 .musical-partners {

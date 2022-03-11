@@ -71,8 +71,8 @@ function songChoice(selection) {
 
     var btn = document.querySelector('.playPause');
 
-    if (selection == 'spring') {
-        btn1 = document.querySelector('.spring');
+    if (selection == 'song1') {
+        btn1 = document.querySelector('.song1');
         if (!btn1.classList.contains('active')) {
             btn1.classList.toggle("active");
 
@@ -91,7 +91,7 @@ function songChoice(selection) {
         }
 
     } else if (selection == 'song2') {
-        btn1 = document.querySelector('.spring');
+        btn1 = document.querySelector('.song1');
         if (btn1.classList.contains('active')) {
             btn1.classList.toggle("active");
         }
@@ -127,7 +127,7 @@ function setupCanvas(c) {
 }
 
 function preload() {
-    songs = [loadSound("jack1.mp3"), loadSound("believe.mp3"), loadSound("isThisLove.mp3")];
+    songs = [loadSound("jack1.mp3"), loadSound("through-the-silence.wav")];
     song = songs[0];
 }
 
