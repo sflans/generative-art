@@ -1,40 +1,38 @@
+/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 @font-face {
     font-family: 'iconfont';
     src: url('iconfont.ttf') format('truetype');
 }
-
 @font-face {
     font-family: 'Lemon';
     src: url(LEMONMILK-Regular.otf);
 }
-
 @font-face {
     font-family: 'Akira';
     src: url("Akira Expanded Demo.otf");
 }
-
 @font-face {
     font-family: 'Cooper';
     src: url("CooperFiveOpti-Black.otf");
 }
 
+
+/* Configuring Page */
 * {
     user-select: none;
 }
-
 main {
     display: none;
 }
 
-
 html,
 body {
     overflow-x: hidden;
-    background-color: #C1BBDD;
-    /* background-color: #B4CAD9; */
+    /* background-color: #C1BBDD; */
+    background: rgb(193,187,221);
+    background: linear-gradient(135deg, rgba(193,187,221,1) 0%, rgba(93,175,208,0.3) 50%);
 }
-
 body {
     margin: 0px;
     padding: 0px;
@@ -42,135 +40,13 @@ body {
     overflow-x: hidden;
 }
 
+
+/* Nav Banner */
 .fa {
     text-align: center;
     font-size: 3rem;
     color: #ffffff;
 }
-
-.name {
-    padding-top: 3%;
-    font-weight: 100;
-    font-family: 'Akira';
-    font-size: 100px;
-    text-align: center;
-    color: #F5FF73;
-}
-
-.project-desc {
-    font-family: 'Akira';
-    font-size: 50px;
-    text-align: center;
-    padding: 2%;
-    color: #F5FF73;
-}
-
-
-/* About Section */
-
-.About {
-    padding-top: 3%;
-    font-family: 'Akira';
-    font-size: 70px;
-    text-align: center;
-    color: #F5FF73;
-}
-
-.header {
-    padding-left: 13%;
-    padding-right: 13%;
-    text-align: left;
-    font-family: 'Akira';
-    font-size: 40px;
-    color: #F5FF73;
-}
-
-.sub-header {
-    padding-bottom: 15px;
-    font-family: 'Lemon';
-    font-size: 1.2rem;
-    color: white;
-}
-
-
-/* Musical Partner Section */
-
-.container {
-    padding: 5%;
-    font-size: 40px;
-    font-family: 'Lemon', cursive;
-}
-
-.artist-name {
-    font-size: 1.5rem;
-    color: white;
-}
-
-.artist-description {
-    font-size: 0.9rem;
-    color: white;
-}
-
-.artist-image-wrapper {
-    text-align: center;
-}
-
-.artist-image {
-    max-height: 30vh;
-    background-color: white;
-    border-radius: 50%;
-}
-
-.artist-link {
-    color: #F5FF73;
-}
-
-.artist-content {
-    font-size: 25px;
-    padding-left: 5%;
-}
-
-.row {
-    padding-top: 5%;
-}
-
-@-webkit-keyframes hue {
-    from {
-        -webkit-filter: hue-rotate(0deg);
-    }
-    to {
-        -webkit-filter: hue-rotate(-360deg);
-    }
-}
-
-canvas {
-    margin: auto;
-    display: block;
-    width: 90vw;
-    overflow: hidden;
-    position: static;
-}
-
-#loading {
-    background: #000000;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    animation-fill-mode: forwards;
-    z-index: 5;
-}
-
-.gif {
-    background: url('loading.gif') no-repeat center center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
 
 .banner {
     float: right;
@@ -180,12 +56,43 @@ canvas {
     margin: 15px 25px 0px 0px;
 }
 
+@media only screen and (max-width: 900px) {
+    .fa-brands {
+        font-size: 2.5rem;
+        margin: 15px 15px 0px 0px;
+    }
+}
+
+/* Dancing Pixels Title */
+.name {
+    display: inline-block;
+    font-family: 'Akira';
+    width: 100%;
+    font-size: 5rem;
+    text-align: center !important;
+    color: #F5FF73;
+}
+
+@media only screen and (max-width: 650px) {
+    .name {
+        font-size: 3.5rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .name {
+        font-size: 2.5rem;
+    }
+}
+
+/* Music Control Center */
 .controlCenter {
     height: 10vh;
     width: 30%;
     background: rgba(146, 146, 195, 0.4);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 40px;
     border-radius: 50px;
     vertical-align: middle;
     display: flex;
@@ -218,51 +125,270 @@ button:hover {
     background-color: #000000;
 }
 
+.btn {
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    color: #ffffff;
+}
+
+.btn.active {
+    background-color: rgba(0,0,0,0.2);
+    border: none;
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 900px) {
+    .controlCenter {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .controlCenter {
+        width: 70%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .controlCenter {
+        width: 90%;
+    }
+}
+
+/* Art Animation */
+
+.live-art{
+    width: 90vw;
+    overflow: hidden;
+    margin: auto;
+}
+
+canvas {
+    margin: auto;
+    display: block;
+    overflow: hidden;
+    position: static;
+    height: 80vh;
+}
+
+#loading {
+    background: #000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    animation-fill-mode: forwards;
+    z-index: 5;
+}
+
+.gif {
+    background: url('loading.gif') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+    canvas {
+        height: 70vh;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    canvas {
+        height: 90vh;
+        width: auto;
+    }
+}
+
+
+/* Project Description */
+.project-desc {
+    font-family: 'Akira';
+    font-size: 3rem;
+    text-align: center;
+    color: #F5FF73;
+    line-height: 100%;
+    width: 50%;
+    margin: 10% auto 20% auto;
+
+}
+
+@media only screen and (max-width: 650px) {
+    .project-desc {
+        font-size: 2rem;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .project-desc {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* About Section */
+.about {
+    font-family: 'Akira';
+    font-size: 4rem;
+    text-align: center;
+    color: #F5FF73;
+    margin-bottom: 5%;
+}
+
+.header {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    font-family: 'Akira';
+    font-size: 3rem;
+    color: #F5FF73;
+}
+
+.sub-header {
+    padding-bottom: 15px;
+    font-family: 'Lemon';
+    font-size: 1.2rem;
+    color: white;
+}
+
+@media only screen and (max-width: 650px) {
+    .about {
+        font-size: 3.5rem;
+    }
+
+    .header {
+        font-size: 2rem;
+        width: 70%;
+    }
+
+    .subheader {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .header {
+        font-size: 1.5rem;
+    }
+
+    .subheader {
+        font-size: 0.9rem;
+        line-height: 90%;
+    }
+}
+
+
+/* Musical Partner Section */
+.partners {
+    margin-bottom: 10vh;
+}
+
+.musical-partners {
+    font-family: 'Akira';
+    font-size: 4rem;
+    text-align: center;
+    color: #F5FF73;
+    /* width: 50%; */
+    margin: 10% auto 0 auto;
+}
+
+.artist-content {
+    font-size: 1rem;
+    max-width: 80% !important;
+    margin-left: 0%;
+    font-family: 'Lemon';
+}
+
+.artist-name {
+    font-size: 1.5rem;
+    color: #F5FF73;
+}
+
+.artist-description {
+    font-size: 0.9rem;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.artist-image-wrapper {
+    text-align: center;
+}
+
+.artist-image {
+    max-height: 30vh;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.artist-link {
+    color: #F5FF73;
+}
+
+@media only screen and (max-width: 800px) {
+    .artist-content{
+        width: 70%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .musical-partners {
+        font-size: 3.5rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .musical-partners {
+        font-size: 2.3rem;
+    }
+}
+
+
+
+/* Webkit animations */
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
 @-webkit-keyframes slideInDown {
     100% {
         top: 40%;
     }
 }
-
 @keyframes slideInDown {
     100% {
         top: 40%;
     }
 }
-
 @-webkit-keyframes slideOutDown {
     100% {
         top: -100vh;
     }
 }
-
 @keyframes slideOutDown {
     100% {
         top: 100vh;
     }
 }
-
 @-webkit-keyframes fadeAway {
     100% {
         background-color: rgba(0, 0, 0, 0);
     }
 }
-
 @keyframes fadeAway {
     100% {
         background-color: rgba(0, 0, 0, 0);
     }
 }
-
-
-/* @-webkit-keyframes slideToBottom {
-    100% {
-        margin-top: 20%;
-    }
-}
-
-@keyframes slideToBottom {
-    100% {
-        margin-top: 20%;
-    }
-} */
